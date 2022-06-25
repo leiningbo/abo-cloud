@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.abo.springcloud.dao.PaymentMapper">
+<mapper namespace="com.abo.springcloud.mapper.PaymentMapper">
   <resultMap id="BaseResultMap" type="com.abo.springcloud.entity.Payment">
     <!--@mbg.generated-->
     <!--@Table payment-->
@@ -23,11 +23,7 @@
     delete from payment
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.abo.springcloud.entity.Payment" useGeneratedKeys="true">
-    <!--@mbg.generated-->
-    insert into payment (serial)
-    values (#{serial,jdbcType=VARCHAR})
-  </insert>
+
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.abo.springcloud.entity.Payment" useGeneratedKeys="true">
     <!--@mbg.generated-->
     insert into payment
