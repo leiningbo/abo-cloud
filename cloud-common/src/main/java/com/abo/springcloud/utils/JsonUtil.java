@@ -54,7 +54,7 @@ public class JsonUtil {
 
 		List<T> ts = new ArrayList<T>();
 		for (String j : jsons) {
-			ts.add(JsonUtil.json2Object(j, c));
+			ts.add(json2Object(j, c));
 		}
 
 		return ts;

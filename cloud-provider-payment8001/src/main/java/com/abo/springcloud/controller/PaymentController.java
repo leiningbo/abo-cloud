@@ -32,7 +32,6 @@ public class PaymentController {
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public Result list(@RequestParam(defaultValue = "0") Integer pageIndex,
                        @RequestParam(defaultValue = "15") Integer pageSize) {
-        log.info("list成功");
         Page<Payment> page = new Page<>(pageIndex, pageSize);
         IPage<Payment> result = paymentService.page(page, null);
         return Result.suc(result);
@@ -41,8 +40,6 @@ public class PaymentController {
     @RequestMapping(value = "/create")
     public Result create(@RequestParam String no){
         Payment payment = new Payment();
-        log.info("创建成功");
-        log.info("创建成功");
         payment.setSerial(no);
         return Result.suc(paymentService.save(payment));
     }
