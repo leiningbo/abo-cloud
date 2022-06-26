@@ -27,8 +27,7 @@ public class PaymentController {
 
     @RequestMapping(value = "/getById/{id}", method = RequestMethod.GET)
     public Result getById(@PathVariable(value = "id") Long id) {
-        Payment payment = paymentFeignService.getPaymentById(id);
-        return Result.suc(payment);
+        return paymentFeignService.getPaymentById(id);
     }
 
 
