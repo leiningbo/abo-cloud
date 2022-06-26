@@ -6,15 +6,15 @@ eureka:
     register-with-eureka: true
     fetchRegistry: true
     service-url:
-      defaultZone: http://localhost:7001/eureka
-#      defaultZone: http://eureka7001.com:7001/eureka,http://eureka7002.com:7002/eureka
+#      defaultZone: http://localhost:7001/eureka
+      defaultZone: http://eureka7001.com:7001/eureka,http://eureka7002.com:7002/eureka
   instance:
     instance-id: payment8001
     prefer-ip-address: true #显示Ip地址
-    #eureka客户端向服务端发送心跳，单位秒，默认30秒
-    lease-renewal-interval-in-seconds: 1
-    #eureka服务端接收到最后1次心跳等待时间上限，默认90秒，超时删除
-    lease-expiration-duration-in-seconds: 2
+#    #eureka客户端向服务端发送心跳，单位秒，默认30秒
+#    lease-renewal-interval-in-seconds: 1
+#    #eureka服务端接收到最后1次心跳等待时间上限，默认90秒，超时删除
+#    lease-expiration-duration-in-seconds: 2
 
 spring:
   application:
