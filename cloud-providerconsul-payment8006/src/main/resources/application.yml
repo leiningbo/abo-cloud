@@ -5,10 +5,13 @@ server:
 spring:
   application:
     name: cloud-provider-pament
-  #cloud-zookeeper注册中心
+  #cloud-consul注册中心
   cloud:
-    zookeeper:
-      connect-string: 192.168.136.131:2181,192.168.136.132:2181,192.168.136.133:2181
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+        service-name: ${spring.application.name}
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://106.15.108.225:3306/abo_study?useUnicode=true&characterEncoding=utf-8&useSSL=false&rewriteBatchedStatements=true&useServerPrehStmts=false&useCompression=true
