@@ -3,12 +3,16 @@ package com.abo.springcloud.controller;
 import com.abo.springcloud.entity.Payment;
 import com.abo.springcloud.response.Result;
 import com.abo.springcloud.service.PaymentService;
+import com.auth0.jwt.impl.PublicClaims;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -33,6 +37,9 @@ public class PaymentController {
     @Autowired
     private PaymentService paymentService;
 
+    @Autowired
+    private DiscoveryClient discoveryClient;
+
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public Result list(@RequestParam(defaultValue = "0") Integer pageIndex,
                        @RequestParam(defaultValue = "15") Integer pageSize) {
@@ -56,6 +63,18 @@ public class PaymentController {
         return Result.suc(payment);
     }
 
-
+    @RequestMapping(value = "/discovery")
+    public Result discovery(){
+        List<String> services = discoveryClient.getServices();
+        for (String s : services) {
+            log.info("ssssss-----"+s);
+        }
+        List<ServiceInstance> instances = discoveryClient.getInstances("CLOUD-PAYMENT-SERVICE");
+        for (ServiceInstance instance : instances) {
+            log.info(instance.getServiceId() + "\t" + instance.getHost() + "\t" +
+                    instance.getPort() + "\t" + instance.getUri());
+        }
+        return Result.suc(this.discoveryClient);
+    }
 
 }
