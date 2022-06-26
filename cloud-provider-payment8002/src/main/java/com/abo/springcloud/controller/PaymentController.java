@@ -9,10 +9,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -49,8 +46,8 @@ public class PaymentController {
         return Result.suc(paymentService.save(payment));
     }
 
-    @RequestMapping(value = "/getById", method = RequestMethod.GET)
-    public Result getById(@RequestParam Long id) {
+    @RequestMapping(value = "/getById/{id}", method = RequestMethod.GET)
+    public Result getById(@PathVariable("id") Long id) {
         log.info("serverPort:{}", serverPort);
         Payment payment = paymentService.getById(id);
         return Result.suc(payment);
