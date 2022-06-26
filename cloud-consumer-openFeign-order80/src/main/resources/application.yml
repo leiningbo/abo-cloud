@@ -7,6 +7,14 @@ eureka:
     service-url:
       defaultZone: http://eureka7001.com:7001/eureka,http://eureka7002.com:7002/eureka
 
+feign:
+  httpclient:
+    time-to-live: 3000
+    connection-timeout: 5000
+
+logging:
+  level:
+    com.abo.springcloud.feignservice.PaymentFeignService: debug
 
 
 

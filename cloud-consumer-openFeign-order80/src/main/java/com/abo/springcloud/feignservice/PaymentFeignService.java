@@ -1,4 +1,4 @@
-package com.abo.springcloud.service;
+package com.abo.springcloud.feignservice;
 
 import com.abo.springcloud.entity.Payment;
 import com.abo.springcloud.response.Result;
