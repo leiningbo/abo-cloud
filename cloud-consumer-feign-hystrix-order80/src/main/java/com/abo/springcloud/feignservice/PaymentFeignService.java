@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @create: 2022-06-26 16:41
  **/
 @Component
-@FeignClient(value = "cloud-provider-hystrix-payment")
+@FeignClient(value = "cloud-provider-hystrix-payment",fallback = PaymentFallbackServoce.class)
 public interface PaymentFeignService {
 
     @RequestMapping(value = "/payment/hystrix/ok/{id}", method = RequestMethod.GET)
@@ -23,6 +23,7 @@ public interface PaymentFeignService {
 
     @RequestMapping(value = "/payment/hystrix/timeOut/{id}", method = RequestMethod.GET)
     Result paymentTimeOut(@PathVariable(value = "id") Integer id);
+
 
 
 }

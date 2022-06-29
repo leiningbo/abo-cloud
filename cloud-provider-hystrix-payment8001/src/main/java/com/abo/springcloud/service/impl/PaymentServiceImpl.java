@@ -29,12 +29,11 @@ public class PaymentServiceImpl extends ServiceImpl<PaymentMapper, Payment> impl
     @Override
     public String paymentInfoTimeOut(Integer id) {
         int time = 5;
-        int age = 10 / 0;
-//        try {
-//            TimeUnit.SECONDS.sleep(time);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
+        try {
+            TimeUnit.SECONDS.sleep(time);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return "xxx" + Thread.currentThread().getName() + "paymentInfoTimeOut__ok,id:" + id + "\t" + "耗时秒：" + time;
     }
 
