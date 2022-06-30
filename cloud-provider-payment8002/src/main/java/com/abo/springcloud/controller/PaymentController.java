@@ -53,6 +53,12 @@ public class PaymentController {
         return Result.suc(payment);
     }
 
+    @RequestMapping(value = "/lb", method = RequestMethod.GET)
+    public Result lb() {
+        log.info("serverPort:{}", serverPort);
+        return Result.suc(serverPort);
+    }
+
 
 
 }
