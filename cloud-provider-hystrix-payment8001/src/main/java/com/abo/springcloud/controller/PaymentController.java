@@ -46,6 +46,16 @@ public class PaymentController {
         return Result.suc(s);
     }
 
+    /**
+     * 服务熔断
+     */
+    @RequestMapping(value = "/circuit/{id}")
+    public Result paymentCircuitBreaker(@PathVariable Integer id){
+        String s = paymentService.paymentCircuitBreaker(id);
+        log.info("========result"+s);
+        return Result.suc(s);
+    }
+
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public Result list(@RequestParam(defaultValue = "0") Integer pageIndex,

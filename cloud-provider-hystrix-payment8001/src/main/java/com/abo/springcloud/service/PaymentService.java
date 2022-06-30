@@ -9,4 +9,6 @@ public interface PaymentService extends IService<Payment> {
 
     String paymentInfoTimeOut(Integer id);
 
+    String paymentCircuitBreaker(Integer id);
+
 }
