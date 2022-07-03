@@ -41,6 +41,8 @@ public class ResponseAdvice implements ResponseBodyAdvice<Object> {
             return Result.fail(errorResult.getStatus(),errorResult.getMessage());
         } else if (obj instanceof String) {
             return JsonUtil.object2Json(Result.suc(obj));
+        } else if (obj instanceof Result) {
+            return obj;
         }
         return Result.suc(obj);
     }
