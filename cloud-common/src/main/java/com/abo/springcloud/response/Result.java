@@ -49,6 +49,17 @@ public class Result<T> {
     }
 
     /**
+     * 成功，创建ResResult：有data数据
+     */
+    public static Result suc(String msg,Object data) {
+        Result result = new Result();
+        result.setResultCode(ResultCode.SUCCESS);
+        result.setDesc(msg);
+        result.setData(data);
+        return result;
+    }
+
+    /**
      * 失败，指定status、desc
      */
     public static Result fail(Integer status, String desc) {
