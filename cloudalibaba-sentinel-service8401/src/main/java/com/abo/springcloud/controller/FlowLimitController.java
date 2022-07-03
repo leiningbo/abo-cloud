@@ -77,8 +77,7 @@ public class FlowLimitController {
     @SentinelResource(value = "customerBlockHandler",
             blockHandlerClass = CustomerBlockHandler.class,
             blockHandler = "handlerException")
-    public Result customerBlockHandler()
-    {
+    public Result customerBlockHandler() {
         return Result.suc("按客戶自定义", new Payment(2020L, "serial003"));
     }
 
