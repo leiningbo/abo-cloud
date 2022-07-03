@@ -14,6 +14,9 @@ spring:
         dashboard: 192.168.136.131:8080
         port: 8719
 
-service-url:
-  nacos-user-service: http://nacos-payment-provider
+
+#对Feign的支持
+feign:
+  sentinel:
+    enabled: true
 

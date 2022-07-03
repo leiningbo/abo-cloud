@@ -1,18 +1,22 @@
 package com.abo.springcloud.controller;
 
 import com.abo.springcloud.entity.Payment;
+import com.abo.springcloud.feign.PaymentService;
 import com.abo.springcloud.response.Result;
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.alibaba.csp.sentinel.slots.block.BlockException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @program: abo-cloud
@@ -29,6 +33,15 @@ public class CircleBreakerController {
     @Resource
     private RestTemplate restTemplate;
 
+    // OpenFeign
+    @Autowired
+    private PaymentService paymentService;
+
+    @GetMapping(value = "/consumer/paymentSQL/{id}")
+    public Result<Payment> paymentSQL(@PathVariable("id") Long id) {
+        return paymentService.paymentSQL(id);
+    }
+
 
 
     @RequestMapping("/consumer/fallback/{id}")
@@ -38,11 +51,12 @@ public class CircleBreakerController {
     @SentinelResource(value = "fallback",fallback = "handlerFallback",blockHandler = "blockHandler",
             exceptionsToIgnore = {IllegalArgumentException.class})
     public Result fallback(@PathVariable Long id) {
-        Result<Payment> result = restTemplate.getForObject(SERVICE_URL + "/paymentSQL/"+id, Result.class,id);
+        Result<Result> result = restTemplate.getForObject(SERVICE_URL + "/paymentSQL/"+id, Result.class,id);
+        Map<String,Object> map = (Map<String,Object>) result.getData();
 
         if (id == 4) {
             throw new IllegalArgumentException ("IllegalArgumentException,非法参数异常....");
-        }else if (result.getData() == null) {
+        }else if (map.get("data") == null) {
             throw new NullPointerException ("NullPointerException,该ID没有对应记录,空指针异常");
         }
 
